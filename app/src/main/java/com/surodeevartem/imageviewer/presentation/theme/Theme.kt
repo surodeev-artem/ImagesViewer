@@ -1,4 +1,4 @@
-package com.surodeevartem.imageviewer.ui.theme
+package com.surodeevartem.imageviewer.presentation.theme
 
 import android.app.Activity
 import android.os.Build
