@@ -61,7 +61,9 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.coil)
 
-    implementation(libs.retrofit)
+    implementation(libs.retrofit.library)
+    implementation(libs.retrofit.gson)
+    implementation(libs.retrofit.interceptor.logging)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
