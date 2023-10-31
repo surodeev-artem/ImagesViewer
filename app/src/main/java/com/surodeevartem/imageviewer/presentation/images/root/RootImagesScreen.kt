@@ -55,6 +55,7 @@ import com.surodeevartem.imageviewer.presentation.images.all.AllImagesViewModel
 import com.surodeevartem.imageviewer.presentation.images.destinations.AllImagesScreenDestination
 import com.surodeevartem.imageviewer.presentation.images.destinations.FavoritesImagesScreenDestination
 import com.surodeevartem.imageviewer.presentation.images.favorites.FavoritesImagesScreen
+import com.surodeevartem.imageviewer.presentation.transition.SlideTransition
 
 private val items = listOf(
     Screen.AllImages,
@@ -62,7 +63,9 @@ private val items = listOf(
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Destination
+@Destination(
+    style = SlideTransition::class,
+)
 @RootNavGraph(start = true)
 @Composable
 fun RootImagesScreen(
