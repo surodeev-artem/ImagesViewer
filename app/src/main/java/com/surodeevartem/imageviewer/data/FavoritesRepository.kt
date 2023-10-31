@@ -2,6 +2,8 @@ package com.surodeevartem.imageviewer.data
 
 import com.surodeevartem.imageviewer.data.local.ImagesDatabase
 import com.surodeevartem.imageviewer.entity.ImageEntity
+import com.surodeevartem.imageviewer.entity.SortingField
+import com.surodeevartem.imageviewer.entity.SortingOrder
 import com.surodeevartem.imageviewer.utils.Result
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -12,8 +14,18 @@ class FavoritesRepository @Inject constructor(
     private val imagesDatabase: ImagesDatabase,
 ) {
 
-    suspend fun getAllFavorites(): List<ImageEntity> {
-        return imagesDatabase.imagesDao().getAll()
+    fun getAllFavorites(
+        sortingOrder: SortingOrder,
+        sortingField: SortingField,
+    ): Flow<List<ImageEntity>> {
+        return when (sortingField) {
+            SortingField.TITLE -> imagesDatabase.imagesDao().getAllSortedByTitle(
+                isAscending = sortingOrder == SortingOrder.ASCENDING,
+            )
+            SortingField.ID -> imagesDatabase.imagesDao().getAllSortedById(
+                isAscending = sortingOrder == SortingOrder.ASCENDING,
+            )
+        }
     }
 
     suspend fun getAllFavoritesId(): Flow<List<Int>> {

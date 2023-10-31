@@ -1,9 +1,6 @@
 package com.surodeevartem.imageviewer.presentation.images.root
 
-import android.media.Image
 import androidx.annotation.StringRes
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -36,9 +33,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.annotation.Destination
@@ -51,7 +45,6 @@ import com.surodeevartem.imageviewer.entity.ImageEntity
 import com.surodeevartem.imageviewer.presentation.images.NavGraphs
 import com.surodeevartem.imageviewer.presentation.images.SortingModalBottomSheet
 import com.surodeevartem.imageviewer.presentation.images.all.AllImagesScreen
-import com.surodeevartem.imageviewer.presentation.images.all.AllImagesViewModel
 import com.surodeevartem.imageviewer.presentation.images.destinations.AllImagesScreenDestination
 import com.surodeevartem.imageviewer.presentation.images.destinations.FavoritesImagesScreenDestination
 import com.surodeevartem.imageviewer.presentation.images.favorites.FavoritesImagesScreen

@@ -29,10 +29,11 @@ import com.surodeevartem.imageviewer.presentation.component.ImageCard
 import com.surodeevartem.imageviewer.presentation.component.ImagesLoadingError
 import com.surodeevartem.imageviewer.presentation.component.ImagesLoadingIndicator
 import com.surodeevartem.imageviewer.presentation.navigation.RootImagesNavGraph
+import com.surodeevartem.imageviewer.presentation.transition.FadeTransition
 
 @OptIn(ExperimentalMaterialApi::class)
 @RootImagesNavGraph(start = true)
-@Destination
+@Destination(style = FadeTransition::class)
 @Composable
 fun AllImagesScreen(
     imageCardClick: (image: ImageEntity) -> Unit,
