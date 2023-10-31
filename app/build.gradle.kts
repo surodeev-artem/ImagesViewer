@@ -89,6 +89,8 @@ dependencies {
 
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
+
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6")
 }
 
 kapt {

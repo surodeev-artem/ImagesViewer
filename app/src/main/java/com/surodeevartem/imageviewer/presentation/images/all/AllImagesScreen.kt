@@ -1,7 +1,5 @@
 package com.surodeevartem.imageviewer.presentation.images.all
 
-import android.media.Image
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,7 +11,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -57,6 +54,9 @@ fun AllImagesScreen(
         Content(
             images = images,
             imageCardClick = imageCardClick,
+            favoriteImagesId = viewModel.favoriteImagesIds,
+            onLikeClick = viewModel::addToFavorite,
+            onUnlikeClick = viewModel::removeFromFavorite,
         )
         PullRefreshIndicator(
             isLoading,
@@ -69,7 +69,10 @@ fun AllImagesScreen(
 @Composable
 private fun Content(
     images: LazyPagingItems<ImageEntity>,
+    favoriteImagesId: List<Int>,
     imageCardClick: (image: ImageEntity) -> Unit,
+    onLikeClick: (image: ImageEntity) -> Unit,
+    onUnlikeClick: (image: ImageEntity) -> Unit,
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -81,10 +84,19 @@ private fun Content(
             key = images.itemKey { it.id },
         ) { index ->
             val image = images[index] ?: return@items
+            val isFavorite = favoriteImagesId.contains(image.id)
             ImageCard(
                 url = image.thumbnailUrl,
                 title = image.title,
+                isFavorite = isFavorite,
                 onClick = { imageCardClick(image) },
+                onLikeClick = {
+                    if (isFavorite) {
+                        onUnlikeClick(image)
+                    } else {
+                        onLikeClick(image)
+                    }
+                }
             )
         }
 
