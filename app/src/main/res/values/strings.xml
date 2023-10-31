@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">ImageViewer</string>
+    <string name="app_name" translatable="false">ImageViewer</string>
+    <string name="all_images">All</string>
+    <string name="favorite_images">Favorite</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="no_internet">No internet connection</string>
+    <string name="server_error">Server error</string>
+    <string name="try_again">Try again</string>
 </resources>

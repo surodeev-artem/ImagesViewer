@@ -1,6 +1,6 @@
-package com.surodeevartem.imageviewer.repository.remote
+package com.surodeevartem.imageviewer.data.remote
 
-import com.surodeevartem.imageviewer.entity.Image
+import com.surodeevartem.imageviewer.entity.ImageEntity
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +12,5 @@ interface ImagesService {
         @Query("_limit") pageSize: Int,
         @Query("_sort") sortBy: String,
         @Query("_order") sortOrder: String,
-    ): List<Image>
+    ): List<ImageEntity>
 }

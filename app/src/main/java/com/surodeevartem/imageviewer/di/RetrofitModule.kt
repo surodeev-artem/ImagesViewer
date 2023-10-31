@@ -1,17 +1,14 @@
 package com.surodeevartem.imageviewer.di
 
-import com.google.gson.GsonBuilder
-import com.surodeevartem.imageviewer.repository.remote.ImagesService
+import com.surodeevartem.imageviewer.data.remote.ImagesService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)

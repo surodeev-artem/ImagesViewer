@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+    implementation(libs.material)
     implementation(libs.coil)
 
     implementation(libs.retrofit.library)
@@ -68,10 +69,15 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
     ksp(libs.room.compiler)
 
     implementation(libs.hilt.android)
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     ksp(libs.hilt.compiler)
+
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

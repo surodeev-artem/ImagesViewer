@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="all_images">Всё</string>
+    <string name="favorite_images">Любимое</string>
+    <string name="sort_by">Сортировать по:</string>
+    <string name="no_internet">Нет соединения с интернетом</string>
+    <string name="server_error">Ошибка соединения с сервером</string>
+    <string name="try_again">Ещё раз</string>
+</resources>
