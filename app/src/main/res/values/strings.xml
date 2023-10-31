@@ -6,4 +6,8 @@
     <string name="no_internet">No internet connection</string>
     <string name="server_error">Server error</string>
     <string name="try_again">Try again</string>
+    <string name="id" translatable="false">ID</string>
+    <string name="by_title">Title</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
 </resources>

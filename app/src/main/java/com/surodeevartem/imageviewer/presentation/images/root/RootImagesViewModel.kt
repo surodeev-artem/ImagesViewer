@@ -1,4 +1,4 @@
-package com.surodeevartem.imageviewer.presentation.main
+package com.surodeevartem.imageviewer.presentation.images.root
 
 import androidx.lifecycle.ViewModel
 import com.surodeevartem.imageviewer.domain.ChangeSortingFieldUseCase
@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class RootImagesViewModel @Inject constructor(
     private val changeSortingFieldUseCase: ChangeSortingFieldUseCase,
     private val changeSortingOrderUseCase: ChangeSortingOrderUseCase,
     getSortingFieldFlowUseCase: GetSortingFieldFlowUseCase,

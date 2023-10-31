@@ -38,9 +38,6 @@ class ImagesPagingSource(
                 sortingField,
             )
 
-            // TODO: Remove it
-            Thread.sleep(1000)
-
             response.fold(
                 onSuccess = { result ->
                     LoadResult.Page(

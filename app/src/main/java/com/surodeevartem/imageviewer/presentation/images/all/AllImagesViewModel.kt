@@ -29,7 +29,7 @@ class AllImagesViewModel @Inject constructor(
     private val sortingOrder = getSortingOrderFlowUseCase.execute()
     private val sortingField = getSortingFieldFlowUseCase.execute()
 
-    var images = getImagesFlow()
+    var images by mutableStateOf(getImagesFlow())
         private set
     val hasConnection = networkConnectionObserver.hasConnection
 

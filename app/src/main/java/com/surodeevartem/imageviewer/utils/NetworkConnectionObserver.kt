@@ -24,10 +24,6 @@ class NetworkConnectionObserver @Inject constructor(
     private val _hasConnection: MutableStateFlow<Boolean>
     val hasConnection: StateFlow<Boolean>
 
-    private val networkRequestBuilder: NetworkRequest.Builder = NetworkRequest.Builder()
-        .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
-        .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-
     init {
         _hasConnection = MutableStateFlow(checkConnection())
         this.hasConnection = _hasConnection.asStateFlow()

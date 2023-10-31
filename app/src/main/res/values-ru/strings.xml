@@ -6,4 +6,7 @@
     <string name="no_internet">Нет соединения с интернетом</string>
     <string name="server_error">Ошибка соединения с сервером</string>
     <string name="try_again">Ещё раз</string>
+    <string name="by_title">Названию</string>
+    <string name="ascending">По возрастанию</string>
+    <string name="descending">По убыванию</string>
 </resources>
