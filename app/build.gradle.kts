@@ -91,6 +91,7 @@ dependencies {
     ksp(libs.compose.destinations.ksp)
 
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6")
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.33.2-alpha")
 }
 
 kapt {

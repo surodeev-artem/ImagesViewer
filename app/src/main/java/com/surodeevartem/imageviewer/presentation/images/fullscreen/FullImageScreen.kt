@@ -1,5 +1,6 @@
 package com.surodeevartem.imageviewer.presentation.images.fullscreen
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
@@ -75,14 +77,17 @@ fun FullImageScreen(
         modifier = Modifier.fillMaxSize(),
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            AsyncCustomCachingImage(
-                url = viewModel.image.url,
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentScale = ContentScale.Fit,
-            )
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.Center,
+            ) {
+                AsyncCustomCachingImage(
+                    url = viewModel.image.url,
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxWidth(),
+                    contentScale = ContentScale.Fit,
+                )
+            }
             Text(
                 text = viewModel.image.title,
                 style = Typography.titleMedium,
