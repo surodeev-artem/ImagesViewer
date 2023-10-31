@@ -87,6 +87,7 @@ private fun Content(
             val image = images[index] ?: return@items
             val isFavorite = favoriteImagesId.contains(image.id)
             ImageCard(
+                id = image.id,
                 url = image.thumbnailUrl,
                 title = image.title,
                 isFavorite = isFavorite,

@@ -24,10 +24,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.surodeevartem.imageviewer.entity.ImageEntity
+import com.surodeevartem.imageviewer.presentation.component.AsyncCustomCachingImage
 import com.surodeevartem.imageviewer.presentation.theme.Typography
 import com.surodeevartem.imageviewer.presentation.transition.SlideTransition
 
@@ -43,7 +43,6 @@ fun FullImageScreen(
 ) {
     val viewModel = hiltViewModel<FullImageViewModel>()
     val isFavorite by viewModel.isFavorite.collectAsState()
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -76,8 +75,8 @@ fun FullImageScreen(
         modifier = Modifier.fillMaxSize(),
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            AsyncImage(
-                model = viewModel.image.url,
+            AsyncCustomCachingImage(
+                url = viewModel.image.url,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()

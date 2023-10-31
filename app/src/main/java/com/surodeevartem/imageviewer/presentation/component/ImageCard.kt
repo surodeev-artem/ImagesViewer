@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.surodeevartem.imageviewer.R
 import com.surodeevartem.imageviewer.presentation.theme.ImageViewerTheme
 import com.surodeevartem.imageviewer.presentation.utils.ImageViewerPreview
@@ -29,6 +28,7 @@ import com.surodeevartem.imageviewer.presentation.utils.debugPlaceholder
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageCard(
+    id: Int,
     url: String,
     title: String,
     isFavorite: Boolean,
@@ -42,8 +42,8 @@ fun ImageCard(
         modifier = modifier,
     ) {
         Column {
-            AsyncImage(
-                model = url,
+            AsyncCustomCachingImage(
+                url = url,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 placeholder = debugPlaceholder(debugPreview = R.drawable.ic_image_placeholder),
@@ -80,6 +80,7 @@ private fun ImageCardPreview() {
         Surface {
             Column {
                 ImageCard(
+                    id = 1,
                     url = "",
                     title = "Test",
                     isFavorite = false,
@@ -87,6 +88,7 @@ private fun ImageCardPreview() {
                     onLikeClick = {},
                 )
                 ImageCard(
+                    id = 1,
                     url = "",
                     title = "Test",
                     isFavorite = true,

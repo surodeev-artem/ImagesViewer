@@ -40,6 +40,7 @@ fun FavoritesImagesScreen(
         ) { index ->
             val image = images[index]
             ImageCard(
+                id = image.id,
                 url = image.thumbnailUrl,
                 title = image.title,
                 isFavorite = true,
