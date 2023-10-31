@@ -8,7 +8,7 @@ class GetFavoriteImagesIdsFlowUseCase @Inject constructor(
     private val favoritesRepository: FavoritesRepository,
 ) {
 
-    suspend fun execute(): Flow<List<Int>> {
+    fun execute(): Flow<List<Int>> {
         return favoritesRepository.getAllFavoritesId()
     }
 }

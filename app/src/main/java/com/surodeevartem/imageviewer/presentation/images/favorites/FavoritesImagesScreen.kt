@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.surodeevartem.imageviewer.entity.ImageEntity
 import com.surodeevartem.imageviewer.presentation.component.ImageCard
 import com.surodeevartem.imageviewer.presentation.navigation.RootImagesNavGraph
 import com.surodeevartem.imageviewer.presentation.transition.FadeTransition
@@ -21,7 +22,9 @@ import com.surodeevartem.imageviewer.presentation.transition.FadeTransition
 @RootImagesNavGraph
 @Destination(style = FadeTransition::class)
 @Composable
-fun FavoritesImagesScreen() {
+fun FavoritesImagesScreen(
+    imageCardClick: (image: ImageEntity) -> Unit,
+) {
     val viewModel = hiltViewModel<FavoriteImageViewModel>()
     val images by viewModel.favoriteImages.collectAsState(initial = listOf())
     val scrollState = rememberLazyListState()
@@ -40,7 +43,7 @@ fun FavoritesImagesScreen() {
                 url = image.thumbnailUrl,
                 title = image.title,
                 isFavorite = true,
-                onClick = { },
+                onClick = { imageCardClick(image) },
                 onLikeClick = { viewModel.removeFromFavorite(image) },
                 modifier = Modifier.animateItemPlacement(),
             )

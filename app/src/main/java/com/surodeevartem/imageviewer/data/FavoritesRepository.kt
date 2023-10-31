@@ -28,7 +28,7 @@ class FavoritesRepository @Inject constructor(
         }
     }
 
-    suspend fun getAllFavoritesId(): Flow<List<Int>> {
+    fun getAllFavoritesId(): Flow<List<Int>> {
         return imagesDatabase.imagesDao().getAllIds()
     }
 
