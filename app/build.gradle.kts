@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.compose.report)
     kotlin("kapt")
-    id("dev.shreyaspatil.compose-compiler-report-generator") version "1.1.0"
 }
 
 android {
@@ -91,8 +91,8 @@ dependencies {
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6")
-    implementation("com.google.accompanist:accompanist-placeholder-material:0.33.2-alpha")
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.accompanist.placeholder.material)
 }
 
 kapt {
