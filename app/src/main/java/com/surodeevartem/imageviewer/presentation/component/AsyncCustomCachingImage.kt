@@ -5,6 +5,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -14,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -62,12 +62,26 @@ fun Modifier.shimmerEffect(): Modifier = composed {
         )
     )
 
+    val baseColor = MaterialTheme.colorScheme.primary
+    val backgroundColor = baseColor.copy(
+        baseColor.alpha,
+        baseColor.red - 0.3f,
+        baseColor.green - 0.3f,
+        baseColor.blue - 0.3f,
+    )
+    val accentColor = baseColor.copy(
+        baseColor.alpha,
+        baseColor.red - 0.15f,
+        baseColor.green - 0.15f,
+        baseColor.blue - 0.15f,
+    )
+
     background(
         brush = Brush.linearGradient(
             colors = listOf(
-                Color(0xFFB8B5B5),
-                Color(0xFF8F8B8B),
-                Color(0xFFB8B5B5),
+                backgroundColor,
+                accentColor,
+                backgroundColor,
             ),
             start = Offset(startOffsetX, 0f),
             end = Offset(startOffsetX + size.width.toFloat(), size.height.toFloat())
