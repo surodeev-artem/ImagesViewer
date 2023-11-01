@@ -126,7 +126,13 @@ private fun Content(
                 }
             }
 
-            else -> {}
+            else -> {
+                if (images.itemCount == 0) {
+                    item {
+                        ImagesListEmptyScreen(modifier = Modifier.fillParentMaxSize())
+                    }
+                }
+            }
         }
 
         when (val state = images.loadState.append) {
@@ -151,12 +157,6 @@ private fun Content(
             }
 
             else -> {}
-        }
-
-        if (images.itemCount == 0) {
-            item {
-                ImagesListEmptyScreen(modifier = Modifier.fillParentMaxSize())
-            }
         }
     }
 }
