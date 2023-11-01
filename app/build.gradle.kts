@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     kotlin("kapt")
+    id("dev.shreyaspatil.compose-compiler-report-generator") version "1.1.0"
 }
 
 android {

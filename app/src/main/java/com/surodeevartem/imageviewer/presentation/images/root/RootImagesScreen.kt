@@ -140,6 +140,7 @@ fun RootImagesScreen(
                 composable(FavoritesImagesScreenDestination) {
                     FavoritesImagesScreen(
                         imageCardClick = imageCardClick,
+                        snackbarHostState = snackbarState,
                     )
                 }
             }

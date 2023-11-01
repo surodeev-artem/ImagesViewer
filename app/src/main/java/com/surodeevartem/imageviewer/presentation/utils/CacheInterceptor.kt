@@ -18,8 +18,6 @@ class CacheInterceptor : Interceptor {
     @OptIn(ExperimentalEncodingApi::class)
     override suspend fun intercept(chain: Interceptor.Chain): ImageResult {
         val filename = "${Base64.encode(chain.request.data.toString().encodeToByteArray())}.png"
-        Log.d("AAA", chain.request.data.toString())
-        Log.d("AAA", filename)
         val context = chain.request.context
         return try {
             val file = File(context.cacheDir, filename)

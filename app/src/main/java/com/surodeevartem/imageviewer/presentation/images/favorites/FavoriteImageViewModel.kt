@@ -1,6 +1,5 @@
 package com.surodeevartem.imageviewer.presentation.images.favorites
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,10 +10,17 @@ import com.surodeevartem.imageviewer.domain.GetSortingFieldFlowUseCase
 import com.surodeevartem.imageviewer.domain.GetSortingOrderFlowUseCase
 import com.surodeevartem.imageviewer.domain.RemoveFavoriteImageUseCase
 import com.surodeevartem.imageviewer.entity.ImageEntity
-import com.surodeevartem.imageviewer.utils.fold
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,11 +30,29 @@ class FavoriteImageViewModel @Inject constructor(
     getSortingFieldFlowUseCase: GetSortingFieldFlowUseCase,
     getSortingOrderFlowUseCase: GetSortingOrderFlowUseCase,
 ) : ViewModel() {
+    private val _snackbarState: MutableSharedFlow<FavoriteImagesScreenSnackbarState> = MutableSharedFlow()
+    val snackbarState: SharedFlow<FavoriteImagesScreenSnackbarState> = _snackbarState.asSharedFlow()
 
     private val sortingOrder = getSortingOrderFlowUseCase.execute()
     private val sortingField = getSortingFieldFlowUseCase.execute()
 
-    var favoriteImages: Flow<List<ImageEntity>> by mutableStateOf(getFavoriteImagesUseCase.execute())
+    private var currentRemovingJob: Job? = null
+    var hiddenImage: ImageEntity? by mutableStateOf(null)
+
+    private var lastRemovedImage: ImageEntity? = null
+        set(value) {
+            if (value != null && field != null) {
+                viewModelScope.launch {
+                    val currentField = field ?: return@launch
+                    currentRemovingJob?.cancel()
+                    removeFavoriteImageUseCase.execute(currentField.id)
+                }
+            }
+            field = value
+            hiddenImage = value
+        }
+
+    var favoriteImages: Flow<ImmutableList<ImageEntity>> by mutableStateOf(getFavoriteImagesUseCase.execute())
         private set
 
     init {
@@ -45,15 +69,30 @@ class FavoriteImageViewModel @Inject constructor(
         }
     }
 
-
     fun removeFromFavorite(image: ImageEntity) {
-        viewModelScope.launch {
-            removeFavoriteImageUseCase.execute(image.id).fold(
-                onSuccess = {
-
-                },
-                onFailure = { Log.d("AAA", "NOK: ${it.message}") },
-            )
+        lastRemovedImage = image
+        currentRemovingJob = viewModelScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Default) {
+                _snackbarState.emit(FavoriteImagesScreenSnackbarState.REMOVED)
+            }
+            delay(SNACKBAR_DURATION)
+            removeFavoriteImageUseCase.execute(image.id)
+            lastRemovedImage = null
         }
     }
+
+    fun undoRemoving() {
+        lastRemovedImage = null
+        currentRemovingJob?.cancel()
+        currentRemovingJob = null
+    }
+
+    companion object {
+        // Short duration of the snackbar
+        private const val SNACKBAR_DURATION = 4000L
+    }
+}
+
+enum class FavoriteImagesScreenSnackbarState {
+    REMOVED,
 }

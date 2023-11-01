@@ -1,6 +1,5 @@
 package com.surodeevartem.imageviewer.presentation.images.all
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,8 +14,10 @@ import com.surodeevartem.imageviewer.domain.GetSortingOrderFlowUseCase
 import com.surodeevartem.imageviewer.domain.RemoveFavoriteImageUseCase
 import com.surodeevartem.imageviewer.entity.ImageEntity
 import com.surodeevartem.imageviewer.utils.NetworkConnectionObserver
-import com.surodeevartem.imageviewer.utils.fold
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,9 +36,7 @@ class AllImagesViewModel @Inject constructor(
     private val sortingField = getSortingFieldFlowUseCase.execute()
 
     var images by mutableStateOf(getImagesFlow())
-        private set
-    val hasConnection = networkConnectionObserver.hasConnection
-    var favoriteImagesIds: List<Int> by mutableStateOf(listOf())
+    var favoriteImagesIds: ImmutableList<Int> by mutableStateOf(persistentListOf())
         private set
 
     init {
@@ -55,26 +54,20 @@ class AllImagesViewModel @Inject constructor(
 
         viewModelScope.launch {
             getFavoriteImagesIdsFlowUseCase.execute().collect {
-                favoriteImagesIds = it
+                favoriteImagesIds = it.toImmutableList()
             }
         }
     }
 
     fun addToFavorite(image: ImageEntity) {
         viewModelScope.launch {
-            addFavoriteImageUseCase.execute(image).fold(
-                onSuccess = { Log.d("AAA", "OK") },
-                onFailure = { Log.d("AAA", "NOK: ${it.message}")},
-            )
+            addFavoriteImageUseCase.execute(image)
         }
     }
 
     fun removeFromFavorite(image: ImageEntity) {
         viewModelScope.launch {
-            removeFavoriteImageUseCase.execute(image.id).fold(
-                onSuccess = { Log.d("AAA", "OK") },
-                onFailure = { Log.d("AAA", "NOK: ${it.message}")},
-            )
+            removeFavoriteImageUseCase.execute(image.id)
         }
     }
 

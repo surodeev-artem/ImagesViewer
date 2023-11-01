@@ -27,12 +27,12 @@ object RetrofitModule {
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-    ) = Retrofit.Builder()
+    ): Retrofit = Retrofit.Builder()
         .baseUrl("https://jsonplaceholder.typicode.com/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     @Provides
-    fun provideImagesService(retrofit: Retrofit) = retrofit.create(ImagesService::class.java)
+    fun provideImagesService(retrofit: Retrofit): ImagesService = retrofit.create(ImagesService::class.java)
 }

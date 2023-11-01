@@ -26,6 +26,7 @@ import androidx.paging.compose.itemKey
 import com.ramcosta.composedestinations.annotation.Destination
 import com.surodeevartem.imageviewer.entity.ImageEntity
 import com.surodeevartem.imageviewer.presentation.component.ImageCard
+import com.surodeevartem.imageviewer.presentation.component.ImagesListEmptyScreen
 import com.surodeevartem.imageviewer.presentation.component.ImagesLoadingError
 import com.surodeevartem.imageviewer.presentation.component.ImagesLoadingIndicator
 import com.surodeevartem.imageviewer.presentation.navigation.RootImagesNavGraph
@@ -83,6 +84,7 @@ private fun Content(
         items(
             count = images.itemCount,
             key = images.itemKey { it.id },
+            contentType = { ImageEntity::class },
         ) { index ->
             val image = images[index] ?: return@items
             val isFavorite = favoriteImagesId.contains(image.id)
@@ -146,6 +148,12 @@ private fun Content(
             }
 
             else -> {}
+        }
+
+        if (images.itemCount == 0) {
+            item {
+                ImagesListEmptyScreen(modifier = Modifier.fillParentMaxSize())
+            }
         }
     }
 }

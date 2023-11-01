@@ -49,7 +49,7 @@ fun AsyncCustomCachingImage(
     )
 }
 
-fun Modifier.shimmerEffect(): Modifier = composed {
+private fun Modifier.shimmerEffect(): Modifier = composed {
     var size by remember {
         mutableStateOf(IntSize.Zero)
     }

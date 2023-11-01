@@ -9,4 +9,5 @@
     <string name="by_title">Названию</string>
     <string name="ascending">По возрастанию</string>
     <string name="descending">По убыванию</string>
+    <string name="images_not_found">Список изображений пуст</string>
 </resources>
