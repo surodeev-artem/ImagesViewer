@@ -13,7 +13,6 @@ import com.surodeevartem.imageviewer.domain.GetSortingFieldFlowUseCase
 import com.surodeevartem.imageviewer.domain.GetSortingOrderFlowUseCase
 import com.surodeevartem.imageviewer.domain.RemoveFavoriteImageUseCase
 import com.surodeevartem.imageviewer.entity.ImageEntity
-import com.surodeevartem.imageviewer.utils.NetworkConnectionObserver
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -29,7 +28,6 @@ class AllImagesViewModel @Inject constructor(
     getFavoriteImagesIdsFlowUseCase: GetFavoriteImagesIdsFlowUseCase,
     getSortingFieldFlowUseCase: GetSortingFieldFlowUseCase,
     getSortingOrderFlowUseCase: GetSortingOrderFlowUseCase,
-    networkConnectionObserver: NetworkConnectionObserver,
 ) : ViewModel() {
 
     private val sortingOrder = getSortingOrderFlowUseCase.execute()

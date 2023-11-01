@@ -1,6 +1,5 @@
 package com.surodeevartem.imageviewer.data
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.surodeevartem.imageviewer.data.paging.ImagesPagingSource

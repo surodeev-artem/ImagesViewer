@@ -46,7 +46,7 @@ fun ImagesLoadingError(
         Text(
             text = when (error) {
                 is NoInternetException -> stringResource(id = R.string.no_internet)
-                else -> stringResource(id = R.string.no_internet)
+                else -> stringResource(id = R.string.server_error)
             },
         )
         TextButton(onClick = onRetryClick) {

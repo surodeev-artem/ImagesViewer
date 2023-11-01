@@ -10,4 +10,6 @@
     <string name="ascending">По возрастанию</string>
     <string name="descending">По убыванию</string>
     <string name="images_not_found">Список изображений пуст</string>
+    <string name="removed_from_favorites">Удалено из избранного</string>
+    <string name="revert">Отменить</string>
 </resources>

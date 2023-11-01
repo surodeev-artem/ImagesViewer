@@ -11,4 +11,6 @@
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
     <string name="images_not_found">Images list is empty</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="revert">Revert</string>
 </resources>

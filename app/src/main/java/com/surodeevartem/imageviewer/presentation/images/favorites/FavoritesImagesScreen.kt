@@ -14,9 +14,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.surodeevartem.imageviewer.R
 import com.surodeevartem.imageviewer.entity.ImageEntity
 import com.surodeevartem.imageviewer.presentation.component.ImageCard
 import com.surodeevartem.imageviewer.presentation.component.ImagesListEmptyScreen
@@ -25,7 +27,6 @@ import com.surodeevartem.imageviewer.presentation.transition.FadeTransition
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
-@OptIn(ExperimentalFoundationApi::class)
 @RootImagesNavGraph
 @Destination(style = FadeTransition::class)
 @Composable
@@ -36,14 +37,17 @@ fun FavoritesImagesScreen(
     val viewModel = hiltViewModel<FavoriteImageViewModel>()
     val images by viewModel.favoriteImages.collectAsState(initial = persistentListOf())
 
+    val snackbarTitle = stringResource(id = R.string.removed_from_favorites)
+    val snackbarActionText = stringResource(id = R.string.revert)
+
     LaunchedEffect(Unit) {
         viewModel.snackbarState.collect {
             when (it) {
                 FavoriteImagesScreenSnackbarState.REMOVED -> {
                     val result = snackbarHostState.showSnackbar(
-                        message = "Удалено из избранного",
+                        message = snackbarTitle,
                         duration = SnackbarDuration.Short,
-                        actionLabel = "Отмена",
+                        actionLabel = snackbarActionText,
                     )
 
                     when (result) {
@@ -54,7 +58,7 @@ fun FavoritesImagesScreen(
             }
         }
     }
-    val hiddenImage = viewModel.hiddenImage
+
     Content(
         hiddenImage = viewModel.hiddenImage,
         images = images,

@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -30,7 +28,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -58,9 +55,7 @@ private val items = listOf(
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Destination(
-    style = SlideTransition::class,
-)
+@Destination(style = SlideTransition::class)
 @RootNavGraph(start = true)
 @Composable
 fun RootImagesScreen(
@@ -166,8 +161,7 @@ fun RootImagesScreen(
 private sealed class Screen(
     val direction: DirectionDestinationSpec,
     @StringRes val title: Int,
-    val icon: ImageVector,
 ) {
-    data object AllImages : Screen(AllImagesScreenDestination, R.string.all_images, Icons.Filled.List)
-    data object FavoriteImages : Screen(FavoritesImagesScreenDestination, R.string.favorite_images, Icons.Filled.Favorite)
+    data object AllImages : Screen(AllImagesScreenDestination, R.string.all_images)
+    data object FavoriteImages : Screen(FavoritesImagesScreenDestination, R.string.favorite_images)
 }
