@@ -31,6 +31,7 @@ import com.surodeevartem.imageviewer.presentation.component.ImagesLoadingError
 import com.surodeevartem.imageviewer.presentation.component.ImagesLoadingIndicator
 import com.surodeevartem.imageviewer.presentation.navigation.RootImagesNavGraph
 import com.surodeevartem.imageviewer.presentation.transition.FadeTransition
+import kotlinx.collections.immutable.ImmutableList
 
 @OptIn(ExperimentalMaterialApi::class)
 @RootImagesNavGraph(start = true)
@@ -71,7 +72,7 @@ fun AllImagesScreen(
 @Composable
 private fun Content(
     images: LazyPagingItems<ImageEntity>,
-    favoriteImagesId: List<Int>,
+    favoriteImagesId: ImmutableList<Int>,
     imageCardClick: (image: ImageEntity) -> Unit,
     onLikeClick: (image: ImageEntity) -> Unit,
     onUnlikeClick: (image: ImageEntity) -> Unit,
@@ -87,7 +88,9 @@ private fun Content(
             contentType = { ImageEntity::class },
         ) { index ->
             val image = images[index] ?: return@items
-            val isFavorite = favoriteImagesId.contains(image.id)
+            val isFavorite = remember(favoriteImagesId) {
+                favoriteImagesId.contains(image.id)
+            }
             ImageCard(
                 id = image.id,
                 url = image.thumbnailUrl,
